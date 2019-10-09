@@ -11,4 +11,5 @@
 Homestead.json
 Homestead.yaml
 /storage/logs/*.key
+/public/.well-known
 resources/views/vendor/mail/*

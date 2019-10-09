@@ -31,22 +31,21 @@ class User extends Authenticatable
 
     public static function authenticate(\DirkGroenen\Pinterest\Models\User $user, $token = null)
     {
-        dd($user);
         //check if user exists in DB
         $db_user = User::getProfile();
         //try Login the user
         if(is_null($db_user)) {
-//            //register the user
-//            $new_user = new self;
-////            $new_user->name = $user->first_name;
-////            $new_user->email = $user->id . "@pinterest.com";
-////            $new_user->password = $user->id;
-//            $new_user->remember_token = $token;
-//            $new_user->img = $user->image["60x60"]['url'];
-//            $new_user->save();
-//            //Authenticate
-//            Auth::loginUsingId($new_user->id);
-//            //Redirect
+            //register the user
+            $new_user = new self;
+            $new_user->name = $user->first_name;
+            $new_user->email = $user->id . "@pinterest.com";
+            $new_user->password = $user->id;
+            $new_user->remember_token = $token;
+            $new_user->img = $user->image["60x60"]['url'];
+            $new_user->save();
+            //Authenticate
+            Auth::loginUsingId($new_user->id);
+            //Redirect
             return \redirect('/login');
         }else {
             try {
@@ -56,15 +55,15 @@ class User extends Authenticatable
                 $db_user->save();
 
                 return \redirect('/pinterest/boards');
-//                if (Auth::loginUsingId($db_user->id)) {
-//                    //check if user configured
-//                    if(IO::get('active_page', new Credential, 'get', ['active_page'], false)) {
-//                        //redirect
-//                        return \redirect('/pinterest/boards');
-//                    }
-//                    //redirect
-//                    return \redirect('/pinterest/boards');
-//                }
+                if (Auth::loginUsingId($db_user->id)) {
+                    //check if user configured
+                    if(IO::get('active_page', new Credential, 'get', ['active_page'], false)) {
+                        //redirect
+                        return \redirect('/pinterest/boards');
+                    }
+                    //redirect
+                    return \redirect('/pinterest/boards');
+                }
             }catch (AuthenticationException $exception) {
                 echo $exception->getMessage();
             }
