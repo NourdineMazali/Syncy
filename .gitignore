@@ -1,0 +1,14 @@
+/node_modules
+/public/hot
+/public/storage
+/database/*.sqlite
+/database/*
+/storage/*
+/vendor
+/ssl
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+/storage/logs/*.key
+resources/views/vendor/mail/*
